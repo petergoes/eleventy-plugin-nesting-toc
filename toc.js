@@ -11,6 +11,8 @@ const defaults = {
     headingText: '',
     headingTag: 'h2',
     ul: false,
+    asDetailSummary: false,
+    summaryText: undefined,
 };
 
 function getParent(prev, current) {
@@ -94,7 +96,7 @@ class Toc {
     }
 
     html() {
-        const {wrapper, wrapperClass, headingText, headingTag} = this.options;
+        const {wrapper, wrapperClass, headingText, headingTag, asDetailSummary, summaryText} = this.options;
         const root = this.get();
 
         let html = '';
@@ -104,8 +106,21 @@ class Toc {
             if (headingText) {
                 html += `<${headingTag}>${headingText}</${headingTag}>\n`;
             }
+            
+            if (asDetailSummary) {
+              html += `<details>`;
+
+              if (summaryText) {
+                html += `<summary>${summaryText}</summary>`
+              }
+            }
+
 
             html += `<${wrapper} class="${wrapperClass}">${root.html(this.options.ul)}</${wrapper}>`;
+
+            if (asDetailSummary) {
+              html += `</details>`
+            }
         }
 
         return html;
