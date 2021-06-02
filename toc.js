@@ -11,7 +11,7 @@ const defaults = {
     headingText: '',
     headingTag: 'h2',
     ul: false,
-    asDetailSummary: false,
+    asDetailsSummary: false,
     summaryText: undefined,
 };
 
@@ -107,7 +107,7 @@ class Toc {
                 html += `<${headingTag}>${headingText}</${headingTag}>\n`;
             }
             
-            if (asDetailSummary) {
+            if (asDetailsSummary) {
               html += `<details>`;
 
               if (summaryText) {
@@ -118,7 +118,7 @@ class Toc {
 
             html += `<${wrapper} class="${wrapperClass}">${root.html(this.options.ul)}</${wrapper}>`;
 
-            if (asDetailSummary) {
+            if (asDetailsSummary) {
               html += `</details>`
             }
         }
