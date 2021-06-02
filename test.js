@@ -72,6 +72,12 @@ const tests = {
         assert.ok(!html.includes(`<h2>Sections</h2>`), 'Unexpected TOC heading of h2 was found');
     },
 
+    withUl() {
+      const toc = new Toc('<h2 id="foo">Foo</h2>', { ul: true });
+      const html = toc.html()
+      assert.ok(html.includes('<ul>'), '<ul> was not rendered as specified')
+    },
+
     nesting() {
         const toc = new Toc(`
             <h1>Foo</h1>
