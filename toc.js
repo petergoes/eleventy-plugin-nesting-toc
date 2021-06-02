@@ -96,7 +96,7 @@ class Toc {
     }
 
     html() {
-        const {wrapper, wrapperClass, headingText, headingTag, asDetailSummary, summaryText} = this.options;
+        const {wrapper, wrapperClass, headingText, headingTag, asDetailsSummary, summaryText} = this.options;
         const root = this.get();
 
         let html = '';
