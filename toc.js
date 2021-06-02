@@ -9,7 +9,8 @@ const defaults = {
     wrapper: 'nav',
     wrapperClass: 'toc',
     headingText: '',
-    headingTag: 'h2'
+    headingTag: 'h2',
+    ul: false,
 };
 
 function getParent(prev, current) {
@@ -37,7 +38,7 @@ class Item {
         this.children = [];
     }
 
-    html() {
+    html(ul = defaults.ul) {
         let markup = '';
         if (this.slug && this.text) {
             markup += `
@@ -46,9 +47,9 @@ class Item {
         }
         if (this.children.length > 0) {
             markup += `
-                <ol>
-                    ${this.children.map(item => item.html()).join('\n')}
-                </ol>
+                <${ul ? 'ul' : 'ol'}>
+                    ${this.children.map(item => item.html(ul)).join('\n')}
+                </${ul ? 'ul' : 'ol'}>
             `;
         }
 
@@ -104,7 +105,7 @@ class Toc {
                 html += `<${headingTag}>${headingText}</${headingTag}>\n`;
             }
 
-            html += `<${wrapper} class="${wrapperClass}">${root.html()}</${wrapper}>`;
+            html += `<${wrapper} class="${wrapperClass}">${root.html(this.options.ul)}</${wrapper}>`;
         }
 
         return html;
