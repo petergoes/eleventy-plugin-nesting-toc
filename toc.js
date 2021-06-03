@@ -116,7 +116,7 @@ class Toc {
             }
 
 
-            html += `<${wrapper} class="${wrapperClass}">${root.html(this.options.ul)}</${wrapper}>`;
+            html += `<${wrapper}${wrapper === 'nav' ? ' aria-label="Table of contents"' : '' } class="${wrapperClass}">${root.html(this.options.ul)}</${wrapper}>`;
 
             if (asDetailsSummary) {
               html += `</details>`
